@@ -1,0 +1,11 @@
+# Date 01-07-2025
+## Topic : AWS S3 Basics
+###Created and set up an AWS free tier account set up an IAM account and launched a static website through S3 
+### What i learned 
+- What is s3?
+- Buckets,oblects,storage classes
+- static stie hosting
+
+### Challenges 
+IAM permisiion error when uploading 
+- Solved it by attaching AmazonS3fullaccess policy
