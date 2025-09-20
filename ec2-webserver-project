@@ -1,0 +1,83 @@
+# 🚀 Deploying a Web Server on AWS EC2 (with SSH and User Data)
+
+## 📌 Project Overview
+This project demonstrates how to launch an **Amazon EC2 instance**, connect to it securely using **PuTTY from Windows**, and set up a simple **web server** using **EC2 User Data**.  
+
+It highlights core AWS skills:
+- Launching EC2 Instances  
+- SSH connectivity from Windows (PuTTY)  
+- Using User Data scripts for automation  
+- Hosting a basic web application  
+
+---
+
+## 🛠️ Steps Implemented
+
+### 1️⃣ Launch EC2 Instance
+- Logged in to **AWS Management Console**  
+- Navigated to **EC2 Service → Launch Instance**  
+- Configurations:  
+  - **AMI**: Amazon Linux 2 (Free Tier)  
+  - **Instance type**: t2.micro  
+  - **Key pair**: Created and downloaded `.pem` file  
+  - **Security Group**: Allowed inbound rules for **SSH (22)** and **HTTP (80)**  
+
+---
+
+### 2️⃣ Connect to Instance from Windows
+- Converted `.pem` key to `.ppk` using **PuTTYgen**  
+- Used **PuTTY** to connect to the instance via Public IP/DNS  
+- Successfully logged in as `ec2-user`  
+
+---
+
+### 3️⃣ Install Web Server using User Data
+During instance launch, added the following **User Data script** (stored in [`scripts/user-data.sh`](scripts/user-data.sh)):
+
+```bash
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<h1>Welcome to my EC2 Web Server 🚀</h1>" > /var/www/html/index.html
+````
+
+This script:
+
+* Updates system packages
+* Installs Apache (`httpd`)
+* Starts and enables the web server on boot
+* Deploys a simple HTML welcome page
+
+---
+
+### 4️⃣ Verify Web Server
+
+* Copied **Public IPv4 DNS / Public IP** of the instance
+* Opened it in browser → Displayed custom HTML page 🎉
+
+---
+
+## 📂 Repository Structure
+
+* [scripts/user-data.sh](scripts/user-data.sh) → EC2 User Data script
+* [docs/setup-steps.md](docs/setup-steps.md) → Detailed setup instructions
+
+---
+
+## 📚 Skills Demonstrated
+
+* AWS EC2 basics
+* Networking & Security Groups
+* SSH with PuTTY (Windows)
+* Infrastructure automation with User Data
+* Basic Web Hosting on EC2
+
+---
+
+## 🌐 Live Demo
+
+Access via EC2 Public DNS:
+`http:
+
